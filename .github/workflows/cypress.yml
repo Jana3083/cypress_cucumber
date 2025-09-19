@@ -1,25 +1,39 @@
 name: Cypress BDD
 
+
 on:
   push:
     branches: [ "master" ]
   pull_request:
 
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
+
 
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+
       - name: Instalar dependências
         run: npm install
 
+
       - name: Rodar Cypress com BDD
         run: npx cypress run --browser chrome --headless
+
+
+      - name: Upload de screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+           name: cypress-screenshots
+           path: cypress/screenshots
