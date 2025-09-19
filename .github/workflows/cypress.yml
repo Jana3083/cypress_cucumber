@@ -22,4 +22,4 @@ jobs:
         run: npm install
 
       - name: Rodar Cypress com BDD
-        run: npx c
+        run: npx cypress run --browser chrome --headless
